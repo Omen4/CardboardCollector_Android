@@ -67,6 +67,7 @@ public class ConnexionController {
                 return null;
             }
         };
-//        TODO RequestManager.get pour associer à la request queue
+
+        RequestManager.getInstance(context).addToRequestQueue(stringRequest);
     }
 }
