@@ -10,6 +10,7 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 public class Card implements Serializable {
@@ -41,7 +42,7 @@ public class Card implements Serializable {
     private String image_url;
 
 
-    public Card(){super();}
+    public Card(){}
 
     public Card(JSONObject jsonCard) throws JSONException{
         id = jsonCard.getInt("cardid");

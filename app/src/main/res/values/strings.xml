@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CardboardCollector</string>
+    <string name="server_ip">http://10.0.2.2:8080/</string>
+    <string name="fichier_preference">MesPreferences</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 </resources>

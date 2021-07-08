@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 public class RequestManager {
@@ -11,6 +12,7 @@ public class RequestManager {
     private static RequestManager instance = null;
     private Context context;
     private RequestQueue requestQueue;
+    private ImageLoader imageLoader;
 
     private RequestManager(Context context){
         this.context = context;
@@ -19,12 +21,13 @@ public class RequestManager {
 
     private RequestQueue getRequestQueue(){
         if(requestQueue == null){
-            instance = new RequestManager(context);
+//            instance = new RequestManager(context);
+            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return requestQueue;
     }
 
-    public static RequestManager getInstance(Context context){
+    public static synchronized RequestManager getInstance(Context context){
         if (instance == null){
             instance = new RequestManager(context);
         }
