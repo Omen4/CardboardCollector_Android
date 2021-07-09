@@ -40,7 +40,8 @@ public class Utilisateur implements Serializable {
         JSONArray jsonListeRole = jsonUtilisateur.getJSONArray("listeRole");
         for(int i = 0; i < jsonListeRole.length(); i++) {
             JSONObject jsonRole = jsonListeRole.getJSONObject(i);
-            Role role = Role.fromJson(jsonRole);
+            Role role = new Role();
+            role = Role.fromJson(jsonRole);
             utilisateur.getListeRole().add(role);
         }
 

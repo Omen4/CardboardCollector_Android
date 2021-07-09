@@ -44,24 +44,46 @@ public class Card implements Serializable {
 
     public Card(){}
 
-    public Card(JSONObject jsonCard) throws JSONException{
-        id = jsonCard.getInt("cardid");
-        cardName = jsonCard.getString("cardname");
-        type = jsonCard.getString("type");
-        desc = jsonCard.getString("desc");
-        atk = jsonCard.getInt("atk");
-        def = jsonCard.getInt("def");
-        level = jsonCard.getInt("level");
-        race = jsonCard.getString("race");
-        attribute = jsonCard.getString("attribute");
-        archetype = jsonCard.getString("archetype");
-        scale = jsonCard.getInt("scale");
-        linkval = jsonCard.getInt("linkval");
-        linkmarkers = jsonCard.getString("linkmarkers");
-        set_name = jsonCard.getString("set_name");
-        set_code = jsonCard.getString("set_code");
-        set_rarity = jsonCard.getString("set_rarity");
-        image_url = jsonCard.getString("image_url");
+    public Card(Integer id, String cardName, String type, String desc, @Nullable Integer atk, @Nullable Integer def, @Nullable Integer level, String race, @Nullable String attribute, @Nullable String archetype, int scale, int linkval, @Nullable String linkmarkers, String set_name, String set_code, String set_rarity, String image_url) {
+        this.id = id;
+        this.cardName = cardName;
+        this.type = type;
+        this.desc = desc;
+        this.atk = atk;
+        this.def = def;
+        this.level = level;
+        this.race = race;
+        this.attribute = attribute;
+        this.archetype = archetype;
+        this.scale = scale;
+        this.linkval = linkval;
+        this.linkmarkers = linkmarkers;
+        this.set_name = set_name;
+        this.set_code = set_code;
+        this.set_rarity = set_rarity;
+        this.image_url = image_url;
+    }
+
+    public static Card FromJson(JSONObject jsonCard) throws JSONException{
+        return  new Card(
+        jsonCard.getInt("cardid"),
+        jsonCard.getString("cardname"),
+        jsonCard.getString("type"),
+        jsonCard.getString("desc"),
+        jsonCard.getInt("atk"),
+        jsonCard.getInt("def"),
+        jsonCard.getInt("level"),
+        jsonCard.getString("race"),
+        jsonCard.getString("attribute"),
+        jsonCard.getString("archetype"),
+        jsonCard.getInt("scale"),
+        jsonCard.getInt("linkval"),
+        jsonCard.getString("linkmarkers"),
+        jsonCard.getString("set_name"),
+        jsonCard.getString("set_code"),
+        jsonCard.getString("set_rarity"),
+        jsonCard.getString("image_url")
+        );
     }
 
 }

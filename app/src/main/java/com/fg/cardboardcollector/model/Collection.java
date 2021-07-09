@@ -29,7 +29,8 @@ public class Collection implements Serializable {
 
         for(int i = 0; i< jsonListCard.length(); i++) {
             JSONObject jsonCard = jsonListCard.getJSONObject(i);
-            listCard.add(new Card(jsonCard));
+            Card card = new Card();
+            listCard.add(card.FromJson(jsonCard));
         }
     }
 }

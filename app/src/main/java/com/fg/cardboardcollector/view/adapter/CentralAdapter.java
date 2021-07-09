@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.model.Card;
 
@@ -43,12 +44,17 @@ public class CentralAdapter extends RecyclerView.Adapter<CentralAdapter.MyViewHo
     public void onBindViewHolder(@NonNull CentralAdapter.MyViewHolder holder, int position) {
 
         holder.cardid.setText(cardList.get(position).getId());
+        holder.cardname.setText(cardList.get(position).getCardName());
 
+        //display the waïfus with Glide because reasons(wanted to try it)
+        Glide.with(context)
+                .load(cardList.get(position).getImage_url())
+                        .into(holder.cardimage);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cardList.size();
     }
 
 
