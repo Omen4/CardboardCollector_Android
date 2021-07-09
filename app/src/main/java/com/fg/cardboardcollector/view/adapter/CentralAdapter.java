@@ -73,4 +73,22 @@ public class CentralAdapter extends RecyclerView.Adapter<CentralAdapter.MyViewHo
 
         }
     }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public List<Card> getCardList() {
+        return cardList;
+    }
+
+    public void setCardList(List<Card> cardList) {
+        this.cardList = cardList;
+    }
+
+
 }

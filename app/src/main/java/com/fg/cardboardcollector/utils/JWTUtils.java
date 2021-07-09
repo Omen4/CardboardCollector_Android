@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
+import com.fg.cardboardcollector.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

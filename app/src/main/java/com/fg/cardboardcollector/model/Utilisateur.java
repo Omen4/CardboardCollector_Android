@@ -54,4 +54,12 @@ public class Utilisateur implements Serializable {
         //Retourner l'utilisateur
         return utilisateur;
     }
+
+    public List<Role> getListeRole() {
+        return listeRole;
+    }
+
+    public List<Collection> getListeCollection() {
+        return listeCollection;
+    }
 }

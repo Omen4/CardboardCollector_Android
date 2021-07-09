@@ -9,12 +9,13 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50sp"
-        android:fontFamily="@font/indigo_daisy"
+        android:layout_above="@id/tv_subtitle"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
-        android:layout_above="@id/tv_subtitle"/>
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/app_name"
+        android:textColor="#F44336"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tv_subtitle"
@@ -25,17 +26,17 @@
         android:fontFamily="@font/roboto_regular"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="50dp"
-        android:layout_above="@id/et_email"/>
+        android:layout_above="@id/et_pseudo"/>
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_pseudo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/e_mail"
+        android:hint="@string/pseudo"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:padding="15dp"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:fontFamily="@font/roboto_regular"
         android:layout_above="@id/et_password"
         android:background="@drawable/et_custom"
@@ -61,13 +62,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_password"
-        android:background="@drawable/btn_custom"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_custom"
+        android:backgroundTint="#F44336"
         android:fontFamily="@font/roboto_regular"
-        android:textColor="@android:color/white"
-        android:text="@string/login"/>
+        android:text="@string/login"
+        android:textColor="@android:color/white" />
 
     <ImageView
         android:layout_width="30dp"

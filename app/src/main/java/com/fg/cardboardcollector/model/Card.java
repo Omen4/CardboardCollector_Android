@@ -86,4 +86,145 @@ public class Card implements Serializable {
         );
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    @Nullable
+    public Integer getAtk() {
+        return atk;
+    }
+
+    public void setAtk(@Nullable Integer atk) {
+        this.atk = atk;
+    }
+
+    @Nullable
+    public Integer getDef() {
+        return def;
+    }
+
+    public void setDef(@Nullable Integer def) {
+        this.def = def;
+    }
+
+    @Nullable
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(@Nullable Integer level) {
+        this.level = level;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    @Nullable
+    public String getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(@Nullable String attribute) {
+        this.attribute = attribute;
+    }
+
+    @Nullable
+    public String getArchetype() {
+        return archetype;
+    }
+
+    public void setArchetype(@Nullable String archetype) {
+        this.archetype = archetype;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public int getLinkval() {
+        return linkval;
+    }
+
+    public void setLinkval(int linkval) {
+        this.linkval = linkval;
+    }
+
+    @Nullable
+    public String getLinkmarkers() {
+        return linkmarkers;
+    }
+
+    public void setLinkmarkers(@Nullable String linkmarkers) {
+        this.linkmarkers = linkmarkers;
+    }
+
+    public String getSet_name() {
+        return set_name;
+    }
+
+    public void setSet_name(String set_name) {
+        this.set_name = set_name;
+    }
+
+    public String getSet_code() {
+        return set_code;
+    }
+
+    public void setSet_code(String set_code) {
+        this.set_code = set_code;
+    }
+
+    public String getSet_rarity() {
+        return set_rarity;
+    }
+
+    public void setSet_rarity(String set_rarity) {
+        this.set_rarity = set_rarity;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
 }
