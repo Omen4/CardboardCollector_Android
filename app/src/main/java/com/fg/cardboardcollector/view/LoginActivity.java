@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.view.fragment.LoginFragment;
@@ -17,13 +19,22 @@ import java.util.ArrayList;
 //sexy instagram login
 public class LoginActivity extends AppCompatActivity {
 
+    TextView textViewPseudo;
+    TextView textViewPassword;
+    Button boutonLogin;
+
+    TextView textViewRegisterPseudo;
+    TextView textViewRegisterPassword;
+    TextView textViewReRegisterPassword;
+    Button boutonRegister;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-
 
         AuthenticationPagerAdapter pagerAdapter = new AuthenticationPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragmet(new LoginFragment());
