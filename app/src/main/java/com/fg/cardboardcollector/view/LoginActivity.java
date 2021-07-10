@@ -5,41 +5,45 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fg.cardboardcollector.R;
+import com.fg.cardboardcollector.controller.ConnexionController;
+import com.fg.cardboardcollector.utils.JWTUtils;
 import com.fg.cardboardcollector.view.fragment.LoginFragment;
 import com.fg.cardboardcollector.view.fragment.RegisterFragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 //sexy instagram login
 public class LoginActivity extends AppCompatActivity {
 
-    TextView textViewPseudo;
-    TextView textViewPassword;
-    Button boutonLogin;
 
-    TextView textViewRegisterPseudo;
-    TextView textViewRegisterPassword;
-    TextView textViewReRegisterPassword;
-    Button boutonRegister;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        if (JWTUtils.isTokenValide(this)) {
+            startActivity(new Intent(this, CentralActivity.class));
+        } else {
+            setContentView(R.layout.activity_login);
+            ViewPager viewPager = findViewById(R.id.viewPager);
+            AuthenticationPagerAdapter pagerAdapter = new AuthenticationPagerAdapter(getSupportFragmentManager());
+            pagerAdapter.addFragmet(new LoginFragment());
+            pagerAdapter.addFragmet(new RegisterFragment());
+            viewPager.setAdapter(pagerAdapter);
 
-        ViewPager viewPager = findViewById(R.id.viewPager);
-
-        AuthenticationPagerAdapter pagerAdapter = new AuthenticationPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragmet(new LoginFragment());
-        pagerAdapter.addFragmet(new RegisterFragment());
-        viewPager.setAdapter(pagerAdapter);
+        }
     }
 
 

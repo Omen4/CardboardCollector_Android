@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class Card implements Serializable {
 
-    private Integer id;
+    private Integer cardId;
     private String cardName;
     private String type;
     private String desc;
@@ -45,7 +45,7 @@ public class Card implements Serializable {
     public Card(){}
 
     public Card(Integer id, String cardName, String type, String desc, @Nullable Integer atk, @Nullable Integer def, @Nullable Integer level, String race, @Nullable String attribute, @Nullable String archetype, int scale, int linkval, @Nullable String linkmarkers, String set_name, String set_code, String set_rarity, String image_url) {
-        this.id = id;
+        this.cardId = id;
         this.cardName = cardName;
         this.type = type;
         this.desc = desc;
@@ -66,32 +66,33 @@ public class Card implements Serializable {
 
     public static Card FromJson(JSONObject jsonCard) throws JSONException{
         return  new Card(
-        jsonCard.getInt("cardid"),
-        jsonCard.getString("cardname"),
-        jsonCard.getString("type"),
-        jsonCard.getString("desc"),
-        jsonCard.getInt("atk"),
-        jsonCard.getInt("def"),
-        jsonCard.getInt("level"),
-        jsonCard.getString("race"),
-        jsonCard.getString("attribute"),
-        jsonCard.getString("archetype"),
-        jsonCard.getInt("scale"),
-        jsonCard.getInt("linkval"),
-        jsonCard.getString("linkmarkers"),
-        jsonCard.getString("set_name"),
-        jsonCard.getString("set_code"),
-        jsonCard.getString("set_rarity"),
-        jsonCard.getString("image_url")
+//                jsonCard.getInt("id"),
+                jsonCard.getInt("cardid"),
+                jsonCard.getString("cardname"),
+                jsonCard.getString("type"),
+                jsonCard.getString("desc"),
+                jsonCard.getInt("atk"),
+                jsonCard.getInt("def"),
+                jsonCard.getInt("level"),
+                jsonCard.getString("race"),
+                jsonCard.getString("attribute"),
+                jsonCard.getString("archetype"),
+                jsonCard.getInt("scale"),
+                jsonCard.getInt("linkval"),
+                jsonCard.getString("linkmarkers"),
+                jsonCard.getString("set_name"),
+                jsonCard.getString("set_code"),
+                jsonCard.getString("set_rarity"),
+                jsonCard.getString("image_url")
         );
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCardId() {
+        return cardId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
     }
 
     public String getCardName() {

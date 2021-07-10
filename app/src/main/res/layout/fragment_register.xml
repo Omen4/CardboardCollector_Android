@@ -46,7 +46,7 @@
 
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_registerpassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/password"
@@ -60,7 +60,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_repassword"
+        android:id="@+id/et_registerrepassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/re_type_password"
