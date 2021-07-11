@@ -8,12 +8,54 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.fg.cardboardcollector.R;
+import com.fg.cardboardcollector.controller.CardController;
+import com.fg.cardboardcollector.view.adapter.CentralAdapter;
 
 public class MyCollectionFragment extends Fragment {
 
-    @Nullable
+    public MyCollectionFragment(){}
+
+    private RecyclerView recyclerView;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_central_mycollection, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView_mycollection);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        CardController.getInstance().getCardsFromUser(this.getActivity(),(cardList)->{
+            recyclerView.setAdapter(
+                    new CentralAdapter(
+                            this.getActivity(),
+                            cardList,
+                            (card)->{CardController.getInstance().AddCardToCollection(
+                                    this.getActivity(),
+                                    (cacard) ->{
+                                        CentralAdapter adapter = (CentralAdapter) recyclerView.getAdapter();
+                                        if (adapter == null) { return; }
+                                        adapter.notifyDataSetChanged();
+                                    },
+                                    card
+                            );
+                            }
+                    )
+            );
+        });
+
+        return view;
     }
 }
+//    NoteAdaptater.NoteViewHolder noteViewHolder = (NoteAdaptater.NoteViewHolder) viewHolder;
+//    NoteAdaptater adapter = (NoteAdaptater) recyclerView.getAdapter();
+//    int itemId = noteViewHolder.getAdapterPosition();
+
+//CardController.getInstance().
+//        AddCardToCollection(
+//        mContext,
+//        (cacarde) -> {},
+//        mData.get(position)
+//        );

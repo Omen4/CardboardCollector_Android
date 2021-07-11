@@ -38,9 +38,7 @@ public class CardDatabaseFragment extends Fragment {
                     new CentralAdapter(
                             this.getActivity(),
                             cardList,
-                            (card)->{
-                                //ce qui se passe quand on clic sur une carte
-                            }
+                            (card)->{}
                     )
             );
         });
@@ -48,3 +46,4 @@ public class CardDatabaseFragment extends Fragment {
         return view;
     }
 }
+

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.model.Card;
 
@@ -35,6 +36,7 @@ public final class CardController {
         void onSave(String urlCard);
     }
 
+    //choppe toutes les cartes dispo
     public void getCards(Context context, CardController.CardListener listener){
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
@@ -73,8 +75,77 @@ public final class CardController {
         RequestManager.getInstance(context).addToRequestQueue(request);
     }
 
+    //choppe uniquement les cartes de l'utilisateur
+    public void getCardsFromUser(Context context, CardController.CardListener listener){
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                context.getResources().getString(R.string.server_ip) + "user/mycollection/mycards",
+                null,
+                (response) -> {
+                    try{
+                        List<Card> cardList = new ArrayList<Card>();
+                        for (int i = 0; i< response.length(); i++){
+                            JSONObject jsonObject =(JSONObject) response.get(i);
+                            Card cardModel = new Card();
+                            cardModel.setCardId(jsonObject.getInt("id"));
+                            cardModel.setCardName(jsonObject.getString("name"));
+                            cardModel.setImage_url(jsonObject.getString("image_url"));
+                            cardList.add(cardModel);
+                        }
+                        listener.onCardListener(cardList);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                (error) -> {
+                    System.out.println(error);
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                SharedPreferences preference = context.getSharedPreferences(
+                        context.getResources().getString(R.string.fichier_preference), 0); // 0 - for private mode
+                String token = preference.getString("token","");
+                HashMap<String,String> params = new HashMap<>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", "Bearer " + token );
+                return params;
+            }
+        };
+        RequestManager.getInstance(context).addToRequestQueue(request);
+    }
+
+    public void AddCardToCollection(Context context, CardController.OneCardListener listener, Card card){
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                context.getResources().getString(R.string.server_ip) + "/card/"+ card.getCardId(),
+                null,
+                (response) -> {
+                   listener.onOneCardListener(card);
+                },
+                (error) -> {
+                    System.out.println(error);
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                SharedPreferences preference = context.getSharedPreferences(
+                        context.getResources().getString(R.string.fichier_preference), 0); // 0 - for private mode
+                String token = preference.getString("token","");
+                HashMap<String,String> params = new HashMap<>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", "Bearer " + token );
+                return params;
+            }
+        };
+        RequestManager.getInstance(context).addToRequestQueue(request);
+    }
+
+
     public interface CardListener{
         void onCardListener(List<Card> cardList);
+    }
+
+    public interface OneCardListener{
+        void onOneCardListener(Card card);
     }
 
 }

@@ -44,12 +44,15 @@ public class Utilisateur implements Serializable {
             role = Role.fromJson(jsonRole);
             utilisateur.getListeRole().add(role);
         }
-
         JSONArray jsonListCollection = jsonUtilisateur.getJSONArray("listeCollection");
-        for(int i = 0; i< jsonListCollection.length(); i++) {
-            JSONObject jsonCollection = jsonListCollection.getJSONObject(i);
-            utilisateur.getListeCollection().add(new Collection(jsonCollection));
-        }
+       //forcer la collection index 0
+        JSONObject jsonCollection = jsonListCollection.getJSONObject(0);
+        utilisateur.getListeCollection().add(new Collection(jsonCollection));
+
+//        for(int i = 0; i< jsonListCollection.length(); i++) {
+//            JSONObject jsonCollection = jsonListCollection.getJSONObject(i);
+//            utilisateur.getListeCollection().add(new Collection(jsonCollection));
+//        }
 
         //Retourner l'utilisateur
         return utilisateur;
