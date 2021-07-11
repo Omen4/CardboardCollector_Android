@@ -1,6 +1,10 @@
 package com.fg.cardboardcollector.view.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,13 +72,14 @@ public class CentralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CardViewHolder cardViewHolder = (CardViewHolder) holder;
         cardViewHolder.id.setText(mData.get(position).getCardId().toString());
         cardViewHolder.name.setText(mData.get(position).getCardName());
-        Card card = mData.get(position);
-        cardViewHolder.layout.setOnClickListener(v -> {clickListener.onClickListener(card);}); //selection du "sur quoi cliquer", renvoyé à la lambda dans le fragment
-
         //Glide for image display
         Glide.with(mContext)
                 .load(mData.get(position).getImage_url())
+                .override(500,500)
                 .into(cardViewHolder.img);
+        Card card = mData.get(position);
+        cardViewHolder.layout.setOnClickListener(v -> {clickListener.onClickListener(card);}); //selection du "sur quoi cliquer", renvoyé à la lambda dans le fragment
+
     }
 
 
@@ -82,5 +87,36 @@ public class CentralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemCount() {
         return mData.size();
     }
+
+//    private void scaleImage(ImageView view){
+//        Drawable drawing = view.getDrawable();
+//        if (drawing == null) {
+//            return;
+//        }
+//        Bitmap bitmap = ((BitmapDrawable) drawing).getBitmap();
+//
+//        int width = bitmap.getWidth();
+//        int height = bitmap.getHeight();
+//        int xBounding = ((View) view.getParent()).getWidth();//EXPECTED WIDTH
+//        int yBounding = ((View) view.getParent()).getHeight();//EXPECTED HEIGHT
+//
+//        float xScale = ((float) xBounding) / width;
+//        float yScale = ((float) yBounding) / height;
+//
+//        Matrix matrix = new Matrix();
+//        matrix.postScale(xScale, yScale);
+//
+//        Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+//        width = scaledBitmap.getWidth();
+//        height = scaledBitmap.getHeight();
+//        BitmapDrawable result = new BitmapDrawable(mContext.getResources(), scaledBitmap);
+//
+//        view.setImageDrawable(result);
+//
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+//        params.width = width;
+//        params.height = height;
+//        view.setLayoutParams(params);
+//    }
 
 }
