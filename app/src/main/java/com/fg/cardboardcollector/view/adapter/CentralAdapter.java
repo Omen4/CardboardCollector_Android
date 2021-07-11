@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,16 +35,17 @@ public class CentralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
 
-        TextView id;
-        TextView name;
-        ImageView img;
+        protected TextView id;
+        protected TextView name;
+        protected ImageView img;
+        protected LinearLayout layout;
 
          public CardViewHolder(@NonNull View itemView){
              super(itemView);
              id = itemView.findViewById(R.id.textView_cardid);
              name = itemView.findViewById(R.id.textView_cardname);
              img = itemView.findViewById(R.id.imageView_cardimage);
-
+             layout = itemView.findViewById(R.id.layout_item_card);
          }
     }
 
@@ -61,8 +63,10 @@ public class CentralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         CardViewHolder cardViewHolder = (CardViewHolder) holder;
-        cardViewHolder.id.setText(mData.get(position).getCardId());
+        cardViewHolder.id.setText(mData.get(position).getCardId().toString());
         cardViewHolder.name.setText(mData.get(position).getCardName());
+        Card card = mData.get(position);
+        cardViewHolder.layout.setOnClickListener(v -> {clickListener.onClickListener(card);}); //selection du "sur quoi cliquer", renvoyé à la lambda dans le fragment
 
         //Glide for image display
         Glide.with(mContext)

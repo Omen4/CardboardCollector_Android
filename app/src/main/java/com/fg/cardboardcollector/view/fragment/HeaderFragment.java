@@ -19,9 +19,9 @@ public class HeaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_header, container, false);
-        // souffler dans le ballon
         return view;
     }
 }

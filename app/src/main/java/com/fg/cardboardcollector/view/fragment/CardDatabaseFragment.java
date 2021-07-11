@@ -34,7 +34,15 @@ public class CardDatabaseFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView_carddatabase);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         CardController.getInstance().getCards(this.getActivity(),(cardList)->{
-            recyclerView.setAdapter(new CentralAdapter(this.getActivity(),cardList,(card)->{}));
+            recyclerView.setAdapter(
+                    new CentralAdapter(
+                            this.getActivity(),
+                            cardList,
+                            (card)->{
+                                //ce qui se passe quand on clic sur une carte
+                            }
+                    )
+            );
         });
 
         return view;
