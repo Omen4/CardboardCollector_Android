@@ -35,7 +35,7 @@ public class CentralActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_central);
+        setContentView(R.layout.fragment_central_carddatabase);
         cardList = new ArrayList<>();
         recyclerViewCentral = findViewById(R.id.recyclerView_central);
 
