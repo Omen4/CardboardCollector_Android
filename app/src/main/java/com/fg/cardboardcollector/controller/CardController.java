@@ -139,6 +139,30 @@ public final class CardController {
         RequestManager.getInstance(context).addToRequestQueue(request);
     }
 
+    public void RemoveCardToCollection(Context context, CardController.OneCardListener listener, Card card){
+        StringRequest request = new StringRequest(
+                Request.Method.DELETE,
+                context.getResources().getString(R.string.server_ip) + "card/"+ card.getCardId(),
+                (response) -> {
+                    listener.onOneCardListener(card);
+                },
+                (error) -> {
+                    System.out.println("error");
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                SharedPreferences preference = context.getSharedPreferences(
+                        context.getResources().getString(R.string.fichier_preference), 0); // 0 - for private mode
+                String token = preference.getString("token","");
+                HashMap<String,String> params = new HashMap<>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", "Bearer " + token );
+                return params;
+            }
+        };
+        RequestManager.getInstance(context).addToRequestQueue(request);
+    }
+
 
     public interface CardListener{
         void onCardListener(List<Card> cardList);
