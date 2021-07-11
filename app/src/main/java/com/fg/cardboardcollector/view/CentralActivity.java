@@ -1,16 +1,25 @@
 package com.fg.cardboardcollector.view;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.model.Card;
+import com.fg.cardboardcollector.utils.JWTUtils;
 import com.fg.cardboardcollector.view.adapter.CentralAdapter;
+import com.fg.cardboardcollector.view.fragment.LoginFragment;
+import com.fg.cardboardcollector.view.fragment.RegisterFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,104 +36,66 @@ import java.util.List;
 
 public class CentralActivity extends AppCompatActivity {
 
-    //private String jsonUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
-    private String jsonUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Noble%20Knight";
-    private RecyclerView recyclerViewCentral;
-    List<Card> cardList;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_central_carddatabase);
-        cardList = new ArrayList<>();
-        recyclerViewCentral = findViewById(R.id.recyclerView_central);
+        if (JWTUtils.isTokenValide(this)) {
+            startActivity(new Intent(this, CentralActivity.class));
+        } else {
+            setContentView(R.layout.activity_central);
+            ViewPager viewPager = findViewById(R.id.viewPager);
+            CentralActivity.AuthenticationPagerAdapter pagerAdapter = new CentralActivity.AuthenticationPagerAdapter(getSupportFragmentManager());
+            pagerAdapter.addFragmet(new LoginFragment());
+            pagerAdapter.addFragmet(new RegisterFragment());
+            viewPager.setAdapter(pagerAdapter);
 
-        GetData getData = new GetData();
-        getData.execute();
-
-    }
-
-    public class GetData extends AsyncTask<String, String, String>{
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            String current = "";
-            try{
-                URL url;
-                HttpURLConnection urlConnection = null;
-                try{
-                    url = new URL(jsonUrl);
-                    urlConnection = (HttpURLConnection) url.openConnection();
-
-                    InputStream is = urlConnection.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(is);
-
-                    int data = isr.read();
-                    while(data != -1){
-                        current +=(char) data;
-                        data = isr.read();
-                    }
-                    return current;
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-                }finally {
-                    if(urlConnection != null) {
-                        urlConnection.disconnect();
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return current;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            try{
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("data");
-
-                for (int i = 0; i< jsonArray.length(); i++){
-                    JSONObject subJsonObject = jsonArray.getJSONObject(i);
-                    Card cardModel = new Card();
-                    cardModel.setCardId(subJsonObject.getInt("id"));
-                    cardModel.setCardName(subJsonObject.getString("name"));
-                    cardModel.setImage_url(subJsonObject.getString("image_url"));
-                    cardList.add(cardModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            PutDataIntoRecyclerView(cardList);
         }
     }
 
-    private void PutDataIntoRecyclerView(List<Card> cardList){
-        CentralAdapter centralAdapter = new CentralAdapter(this, cardList);
-        recyclerViewCentral.setLayoutManager(new LinearLayoutManager(this));
+
+    class AuthenticationPagerAdapter extends FragmentPagerAdapter {
+
+        private ArrayList<Fragment> fragmentList = new ArrayList<>();
+
+        public AuthenticationPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragmentList.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        void addFragmet(Fragment fragment) {
+            fragmentList.add(fragment);
+        }
     }
 
-
-//    private void init(){
-//        setContentView(R.layout.activity_central);
-//
-//        recyclerViewCentral = findViewById(R.id.recyclerView_central);
-//        recyclerViewCentral.setLayoutManager(new LinearLayoutManager(this));
-//
-//        UtilisateurController.getInstance().getUtilisateurConnecte(
-//                this,
-//                (utilisateur ->{
-//                    recyclerViewUserCentral.setAdapter(
-//                            new UserCentralAdapter()
-//                    );
-//                }
-//        );
-//    }
 }
+//
+//            try{
+//                JSONObject jsonObject = new JSONObject(s);
+//                JSONArray jsonArray = jsonObject.getJSONArray("data");
+//
+//                for (int i = 0; i< jsonArray.length(); i++){
+//                    JSONObject subJsonObject = jsonArray.getJSONObject(i);
+//                    Card cardModel = new Card();
+//                    cardModel.setCardId(subJsonObject.getInt("id"));
+//                    cardModel.setCardName(subJsonObject.getString("name"));
+//                    cardModel.setImage_url(subJsonObject.getString("image_url"));
+//
+//                    cardList.add(cardModel);
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            PutDataIntoRecyclerView(cardList);
+//        }
+

@@ -58,7 +58,7 @@ public class ConnexionController {
 
     public void connexion(
             Context context,
-            String login,
+            String pseudo,
             String password,
             SuccesEcouteur ecouteurSucces,
             ErreurEcouteur ecouteurErreur
@@ -92,8 +92,8 @@ public class ConnexionController {
             public byte[] getBody() throws AuthFailureError {
                 try {
                     JSONObject jsonBody = new JSONObject();
-                    jsonBody.put("userpseudo", login);
-                    jsonBody.put("userpassword", password);
+                    jsonBody.put("pseudo", pseudo);
+                    jsonBody.put("password", password);
 
                     return jsonBody.toString().getBytes(StandardCharsets.UTF_8);
 

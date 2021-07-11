@@ -7,12 +7,6 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
-@Getter
-@Setter
 public class Card implements Serializable {
 
     private Integer cardId;

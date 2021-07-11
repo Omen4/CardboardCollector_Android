@@ -13,6 +13,7 @@
         android:theme="@style/CardboardCollector"
         android:usesCleartextTraffic="true">
         <activity android:name=".view.MenuActivity"></activity>
+        <activity android:name=".view.CentralActivity"></activity>
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
