@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_item_card"
+    android:id="@+id/layout_item_card_collection"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -17,13 +17,13 @@
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/layout_item_frame2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage_collection"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView_cardname"
+            android:id="@+id/textView_cardname_collection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0sp"
@@ -37,7 +37,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView_cardid"
+            android:id="@+id/textView_cardid_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -55,17 +55,17 @@
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/layout_item_frame1"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage_collection"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/btn_addtocollection"
+            android:id="@+id/btn_removefromcollection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#F44336"
-            android:text="Add"
+            android:text="Remove"
             android:layout_gravity="left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_details"
@@ -81,12 +81,12 @@
             android:backgroundTint="#F44336"
             android:text="More"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage"
-            app:layout_constraintStart_toEndOf="@+id/btn_addtocollection" />
+            app:layout_constraintEnd_toStartOf="@+id/imageView_cardimage_collection"
+            app:layout_constraintStart_toEndOf="@+id/btn_removefromcollection" />
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/imageView_cardimage"
+        android:id="@+id/imageView_cardimage_collection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

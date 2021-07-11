@@ -7,6 +7,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.model.Card;
 
@@ -115,15 +116,14 @@ public final class CardController {
     }
 
     public void AddCardToCollection(Context context, CardController.OneCardListener listener, Card card){
-        JsonObjectRequest request = new JsonObjectRequest(
+        StringRequest request = new StringRequest(
                 Request.Method.POST,
-                context.getResources().getString(R.string.server_ip) + "/card/"+ card.getCardId(),
-                null,
+                context.getResources().getString(R.string.server_ip) + "card/"+ card.getCardId(),
                 (response) -> {
                    listener.onOneCardListener(card);
                 },
                 (error) -> {
-                    System.out.println(error);
+                    System.out.println("error");
                 }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError{

@@ -43,10 +43,10 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
          public CardViewHolder(@NonNull View itemView){
              super(itemView);
-             id = itemView.findViewById(R.id.textView_cardid);
-             name = itemView.findViewById(R.id.textView_cardname);
-             img = itemView.findViewById(R.id.imageView_cardimage);
-             layout = itemView.findViewById(R.id.layout_item_card);
+             id = itemView.findViewById(R.id.textView_cardid_collection);
+             name = itemView.findViewById(R.id.textView_cardname_collection);
+             img = itemView.findViewById(R.id.imageView_cardimage_collection);
+             layout = itemView.findViewById(R.id.layout_item_card_collection);
 
          }
     }
@@ -57,7 +57,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     {
         View view = LayoutInflater
                 .from(parent.getContext() )
-                .inflate(R.layout.card_item, parent, false);
+                .inflate(R.layout.card_item_collection, parent, false);
         return new CardViewHolder(view);
     }
 
@@ -77,6 +77,14 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+
+    public List<Card> getmData() {
+        return mData;
+    }
+
+    public void setmData(List<Card> mData) {
+        this.mData = mData;
+    }
 
     @Override
     public int getItemCount() {

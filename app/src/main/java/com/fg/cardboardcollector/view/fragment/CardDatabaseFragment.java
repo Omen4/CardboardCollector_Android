@@ -1,31 +1,31 @@
 package com.fg.cardboardcollector.view.fragment;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.controller.CardController;
-import com.fg.cardboardcollector.controller.ConnexionController;
-import com.fg.cardboardcollector.view.CentralActivity;
-import com.fg.cardboardcollector.view.adapter.CentralAdapter;
+import com.fg.cardboardcollector.model.Card;
+import com.fg.cardboardcollector.view.adapter.CardDatabaseAdapter;
+import com.fg.cardboardcollector.view.adapter.MyCollectionAdapter;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class CardDatabaseFragment extends Fragment {
 
     public CardDatabaseFragment(){}
 
     private RecyclerView recyclerView;
+    private ArrayList<Card> cardList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,10 +35,20 @@ public class CardDatabaseFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         CardController.getInstance().getCards(this.getActivity(),(cardList)->{
             recyclerView.setAdapter(
-                    new CentralAdapter(
+                    new CardDatabaseAdapter(
                             this.getActivity(),
                             cardList,
-                            (card)->{}
+                            (card)->{CardController.getInstance().AddCardToCollection(
+                                    this.getActivity(),
+                                    (cacard) ->{
+                                        RecyclerView recyclerViewMyCollection = ((Activity)getContext()).findViewById(R.id.recyclerView_mycollection);
+                                        MyCollectionAdapter adapter = (MyCollectionAdapter) recyclerViewMyCollection.getAdapter();
+                                        if (adapter == null) { return; }
+                                        adapter.getmData().add(cacard);
+                                        adapter.notifyDataSetChanged();
+                                    },
+                                    card);
+                            }
                     )
             );
         });

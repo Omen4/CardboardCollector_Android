@@ -5,15 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fg.cardboardcollector.R;
 import com.fg.cardboardcollector.controller.CardController;
-import com.fg.cardboardcollector.view.adapter.CentralAdapter;
+import com.fg.cardboardcollector.view.adapter.CardDatabaseAdapter;
+import com.fg.cardboardcollector.view.adapter.MyCollectionAdapter;
 
 public class MyCollectionFragment extends Fragment {
 
@@ -29,19 +28,10 @@ public class MyCollectionFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         CardController.getInstance().getCardsFromUser(this.getActivity(),(cardList)->{
             recyclerView.setAdapter(
-                    new CentralAdapter(
+                    new MyCollectionAdapter(
                             this.getActivity(),
                             cardList,
-                            (card)->{CardController.getInstance().AddCardToCollection(
-                                    this.getActivity(),
-                                    (cacard) ->{
-                                        CentralAdapter adapter = (CentralAdapter) recyclerView.getAdapter();
-                                        if (adapter == null) { return; }
-                                        adapter.notifyDataSetChanged();
-                                    },
-                                    card
-                            );
-                            }
+                            (card)->{}
                     )
             );
         });
