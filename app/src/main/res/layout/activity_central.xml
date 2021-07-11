@@ -8,7 +8,7 @@
     tools:context=".view.CentralActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/centralViewPager"
+        android:id="@+id/viewPagerCentral"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

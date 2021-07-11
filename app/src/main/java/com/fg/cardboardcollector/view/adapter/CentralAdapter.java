@@ -16,53 +16,64 @@ import com.fg.cardboardcollector.model.Card;
 
 import java.util.List;
 
-public class CentralAdapter extends RecyclerView.Adapter<CentralAdapter.MyViewHolder> {
+public class CentralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context mContext;
     private List<Card> mData;
+    private Context mContext;
+    private ClickListener clickListener;
 
-    public CentralAdapter(Context mContext, List<Card> mData) {
+    public  interface ClickListener{
+        void onClickListener(Card card);
+    }
+
+    public CentralAdapter( Context mContext, List<Card> mData, ClickListener clickListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.clickListener = clickListener;
     }
 
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v;
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        v = inflater.inflate(R.layout.card_item,parent,false);
-        return new MyViewHolder(v);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.id.setText(mData.get(position).getCardId());
-        holder.name.setText(mData.get(position).getCardName());
-
-        //Glide for image display
-        Glide.with(mContext)
-                .load(mData.get(position).getImage_url())
-                .into(holder.img);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class CardViewHolder extends RecyclerView.ViewHolder{
 
         TextView id;
         TextView name;
         ImageView img;
 
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            id = itemView.findViewById(R.id.textView_cardid);
-            name = itemView.findViewById(R.id.textView_cardname);
-            img = itemView.findViewById(R.id.imageView_cardimage);
-        }
+         public CardViewHolder(@NonNull View itemView){
+             super(itemView);
+             id = itemView.findViewById(R.id.textView_cardid);
+             name = itemView.findViewById(R.id.textView_cardname);
+             img = itemView.findViewById(R.id.imageView_cardimage);
+
+         }
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
+        View view = LayoutInflater
+                .from(parent.getContext() )
+                .inflate(R.layout.card_item, parent, false);
+        return new CardViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        CardViewHolder cardViewHolder = (CardViewHolder) holder;
+        cardViewHolder.id.setText(mData.get(position).getCardId());
+        cardViewHolder.name.setText(mData.get(position).getCardName());
+
+        //Glide for image display
+        Glide.with(mContext)
+                .load(mData.get(position).getImage_url())
+                .into(cardViewHolder.img);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
     }
 
 }
