@@ -52,7 +52,6 @@ public class CardDatabaseFragment extends Fragment {
                     )
             );
         });
-
         return view;
     }
 }

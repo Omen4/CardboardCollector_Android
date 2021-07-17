@@ -2,6 +2,7 @@ package com.fg.cardboardcollector.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -121,6 +122,7 @@ public final class CardController {
                 context.getResources().getString(R.string.server_ip) + "card/"+ card.getCardId(),
                 (response) -> {
                    listener.onOneCardListener(card);
+                    Toast.makeText(context,"Carte ajoutée",Toast.LENGTH_SHORT).show();
                 },
                 (error) -> {
                     System.out.println("error");
@@ -139,12 +141,13 @@ public final class CardController {
         RequestManager.getInstance(context).addToRequestQueue(request);
     }
 
-    public void RemoveCardToCollection(Context context, CardController.OneCardListener listener, Card card){
+    public void RemoveCardToCollection(Context context, Card card){
         StringRequest request = new StringRequest(
                 Request.Method.DELETE,
                 context.getResources().getString(R.string.server_ip) + "card/"+ card.getCardId(),
                 (response) -> {
-                    listener.onOneCardListener(card);
+                    Toast.makeText(context,"Carte supprimée",Toast.LENGTH_SHORT).show();
+                    System.out.println("alrayt");
                 },
                 (error) -> {
                     System.out.println("error");

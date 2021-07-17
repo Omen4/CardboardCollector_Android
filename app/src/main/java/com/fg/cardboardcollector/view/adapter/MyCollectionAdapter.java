@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected TextView name;
         protected ImageView img;
         protected ConstraintLayout layout;
-        //décla et récup
+        protected Button button;
 
          public CardViewHolder(@NonNull View itemView){
              super(itemView);
@@ -47,7 +48,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
              name = itemView.findViewById(R.id.textView_cardname_collection);
              img = itemView.findViewById(R.id.imageView_cardimage_collection);
              layout = itemView.findViewById(R.id.layout_item_card_collection);
-
+             button = itemView.findViewById(R.id.btn_removefromcollection);
          }
     }
 
@@ -74,7 +75,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .into(cardViewHolder.img);
         Card card = mData.get(position);
         cardViewHolder.layout.setOnClickListener(v -> {clickListener.onClickListener(card);}); //selection du "sur quoi cliquer", renvoyé à la lambda dans le fragment
-
+        cardViewHolder.button.setOnClickListener(z -> {clickListener.onClickListener(card);});
     }
 
 
