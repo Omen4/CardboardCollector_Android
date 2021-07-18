@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,9 +31,9 @@ public class CardDatabaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_central_carddatabase, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerView_carddatabase);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
         CardController.getInstance().getCards(this.getActivity(),(cardList)->{
             recyclerView.setAdapter(
                     new CardDatabaseAdapter(

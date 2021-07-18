@@ -2,7 +2,9 @@ package com.fg.cardboardcollector.view;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 
 public class CentralActivity extends AppCompatActivity {
 
+    String[] titles = new String[]{"Card Database", "Card Collection"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,23 @@ public class CentralActivity extends AppCompatActivity {
         pagerAdapter.addFragmet(new CardDatabaseFragment());
         pagerAdapter.addFragmet(new MyCollectionFragment());
         viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                getSupportActionBar().setTitle(titles[position]);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
 

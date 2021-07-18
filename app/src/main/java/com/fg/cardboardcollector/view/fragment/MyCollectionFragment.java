@@ -27,9 +27,9 @@ public class MyCollectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_central_mycollection, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerView_mycollection);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
         CardController.getInstance().getCardsFromUser(
                 this.getActivity(),
                 (cardList)->{
